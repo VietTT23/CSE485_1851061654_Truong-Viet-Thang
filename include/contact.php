@@ -35,7 +35,17 @@ if(isset($_POST['contact'])){
 	$run = mysqli_query($conn, $query);
 
 	if($run){
-		header('location: ../index.php#contact');
+		$to_email = "$email";
+		$subject = "Thanks for contacting me";
+		$body = "Cảm ơn bạn đã liên hệ với tôi, tôi sẽ sớm phản hổi lời nhắn của bạn!";
+		$headers = "From: Trương Việt Thắng";
+ 
+		if (mail($to_email, $subject, $body, $headers)) {
+    			header('location: ../thank.php');
+		} else {
+    			header('location: ../error.php');
+		}
+		//header('location: ../index.php#contact');
 		//echo 'Your message has been sent. Thank you!';
 	}
 }
